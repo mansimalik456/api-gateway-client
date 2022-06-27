@@ -18,6 +18,11 @@ spring:
           uri: lb://token-service
           predicates:
             - Path=/get/**
+          filters:
+          - name: CircuitBreaker
+            args:
+              name: token-service
+              fallbackuri: forward:/serviceFallBack
         - id: tokenmanagement-service
           uri: lb://tokenmanagement-service
           predicates:
@@ -26,6 +31,20 @@ spring:
           uri: lb://communication-scaffold-service
           predicates:
             - Path=/v1/**
+          filters:
+          - name: CircuitBreaker
+            args:
+              name: communication-scaffold-service
+              fallbackuri: forward:/serviceFallBack
+        - id: feign-client-service
+          uri: lb://feign-client-service
+          predicates:
+            - Path=/feignClient/**
+          filters:
+          - name: CircuitBreaker
+            args:
+              name: feign-client-service
+              fallbackuri: forward:/serviceFallBack 
         - id: chatroom-service
           uri: lb://chatroom-service
           predicates:
