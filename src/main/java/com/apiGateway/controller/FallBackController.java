@@ -6,9 +6,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class FallBackController {
 
-	@GetMapping("/serviceFallBack")
-	public String fallBackMethod() {
-		return "Service is taking longer than Expected...................." + " \n"
+	@GetMapping("/feignServiceFallBack")
+	public String feignClientFallBackMethod() {
+		return "Feign Client Service is taking longer than Expected...................." + " \n"
+				+ "Please try again later.......................";
+	}
+	
+	@GetMapping("/scaffoldServiceFallBack")
+	public String scaffoldFallBackMethod() {
+		return "Scaffold Service is taking longer than Expected...................." + " \n"
 				+ "Please try again later.......................";
 	}
 	
